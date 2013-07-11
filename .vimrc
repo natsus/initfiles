@@ -88,6 +88,9 @@ set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
 " ステータスラインの色
 highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
 
+" カラー設定
+colorscheme darkblue
+
 "----------------------------------------------------
 " インデント
 "----------------------------------------------------
@@ -207,6 +210,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'tpope/vim-endwise.git' 
 NeoBundle 'ruby-matchit'
 NeoBundle 'vim-scripts/dbext.vim'
+NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 "" 補完
 NeoBundle 'Shougo/neocomplcache'
@@ -268,3 +272,50 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 "
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+
+"---------------------------------------------
+" VIM-LaTeX
+"---------------------------------------------
+filetype plugin on
+filetype indent on
+set shellslash
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Imap_UsePlaceHolders = 1
+let g:Imap_DeleteEmptyPlaceHolders = 1
+let g:Imap_StickyPlaceHolders = 0
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+"let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+"let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
+let g:Tex_FormatDependency_ps = 'dvi,ps'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+"let g:Tex_CompileRule_pdf = '/usr/texbin/ptex2pdf -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
+"let g:Tex_CompileRule_pdf = '/usr/texbin/ptex2pdf -l -u -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
+"let g:Tex_CompileRule_pdf = '/usr/texbin/pdflatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+"let g:Tex_CompileRule_pdf = '/usr/texbin/lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+""let g:Tex_CompileRule_pdf = '/usr/texbin/luajitlatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+"let g:Tex_CompileRule_pdf = '/usr/texbin/xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+"let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+"let g:Tex_CompileRule_pdf = '/usr/local/bin/ps2pdf $*.ps'
+
+"let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
+"let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+"let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+"let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
+"let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
+"let g:Tex_BibtexFlavor = '/usr/texbin/bibtex'
+"let g:Tex_BibtexFlavor = '/usr/texbin/bibtexu'
+"let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
+"let g:Tex_MakeIndexFlavor = '/usr/texbin/makeindex $*.idx'
+"let g:Tex_MakeIndexFlavor = '/usr/texbin/texindy $*.idx'
+let g:Tex_UseEditorSettingInDVIViewer = 1
+let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
+"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
+"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
+"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Firefox.app'
+"let g:Tex_ViewRule_pdf = '/usr/bin/open -a "Adobe Reader.app"'
+let g:Tex_ViewRule_ps = '/usr/bin/open'
+let g:Tex_ViewRule_dvi = '/usr/bin/open'
