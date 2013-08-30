@@ -117,8 +117,8 @@ au BufNewFile,BufRead *.rb    set nowrap tabstop=2 shiftwidth=2
 set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
-set fileencodings=ucs-bom,euc-jp,cp932,iso-2022-jp
-set fileencodings+=,ucs-2le,ucs-2,utf-8
+set fileencodings=utf-8,ucs-bom,euc-jp,cp932,iso-2022-jp
+set fileencodings+=,ucs-2le,ucs-2
 
 "----------------------------------------------------
 " オートコマンド
@@ -338,3 +338,9 @@ let g:Tex_IgnoredWarnings =
     \"Font shape \`JY1/mc/bx/it\' undefined"."\n".
     \'LaTeX Font Warning: Some font shapes were not available, defaults substituted.'
 let g:Tex_IgnoreLevel = 14
+
+" Mac ではalt+key が入力できないのでマッピング変更
+imap ∫ <Plug>Tex_MathBF
+imap ç <Plug>Tex_MathCal
+imap ¬ <Plug>Tex_LeftRight
+imap \it <Plug>Tex_InsertItemOnThisLine
