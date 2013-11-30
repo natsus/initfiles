@@ -233,6 +233,13 @@ NeoBundle 'basyura/unite-rails'
 "NeoBundle 'taq/vim-rspec'
 ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 
+"" markdown のsyntaxハイライト
+NeoBundle 'tpope/vim-markdown'
+
+"" coffee script
+NeoBundle 'kchmck/vim-coffee-script'
+
+
 filetype plugin indent on     " required!
 filetype indent on
 syntax on
@@ -300,10 +307,12 @@ let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
 "let g:Tex_CompileRule_pdf = '/usr/local/bin/ps2pdf $*.ps'
 "let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
 "let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
-let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode -file-line-error-style -kanji=sjis $*'
+
+"let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode -file-line-error-style -kanji=sjis $*'
+let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+
 "let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_BibtexFlavor = 'bibtex'
-"let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
+let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
 "let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
 "let g:Tex_BibtexFlavor = '/usr/texbin/bibtex'
 "let g:Tex_BibtexFlavor = '/usr/texbin/bibtexu'
@@ -339,8 +348,21 @@ let g:Tex_IgnoredWarnings =
     \'LaTeX Font Warning: Some font shapes were not available, defaults substituted.'
 let g:Tex_IgnoreLevel = 14
 
+" Makefile を読み込ませない
+let g:Tex_UseMakefile = 0
+
 " Mac ではalt+key が入力できないのでマッピング変更
 imap ∫ <Plug>Tex_MathBF
 imap ç <Plug>Tex_MathCal
 imap ¬ <Plug>Tex_LeftRight
 imap \it <Plug>Tex_InsertItemOnThisLine
+" EALの入力で
+" \begin{align}
+" <++>
+" \label{eq:<++>}
+" \end{align}<++>
+" を出力する。
+augroup MyIMAPs
+    au!
+    au VimEnter * call IMAP('EAL','\begin{align}<++>\label{eq:<++>}\end{align}<++>','tex')
+augroup END
