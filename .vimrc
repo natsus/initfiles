@@ -199,12 +199,25 @@ NeoBundle 'Shougo/neobundle.vim', {
   \ 'depends': ['Shougo/unite.vim'],
  \ }
 " NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
 NeoBundle 'VimClojure'
 NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'scrooloose/syntastic'
+
+"" Unite
+NeoBundle 'Shougo/unite.vim'
+
+"" Unite source
+NeoBundle 'Shougo/unite-outline'
+
 
 "" その他
 NeoBundle 'tpope/vim-endwise.git' 
@@ -316,126 +329,12 @@ filetype indent on
 syntax on
 
 
-""" unite.vim
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
-let g:unite_enable_split_vertically = 1 "縦分割で開く
-" let g:unite_winwidth = 40 "横幅40で開く
+" unite の設定
+if filereadable(expand('~/initfiles/unite.vimrc'))
+    source ~/initfiles/unite.vimrc
+endif
 
-" インサート／ノーマルどちらからでも呼び出せるようにキーマップ
-nnoremap <silent> <C-f> :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-inoremap <silent> <C-f> <ESC>:<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> <C-b> :<C-u>Unite buffer file_mru<CR>
-inoremap <silent> <C-b> <ESC>:<C-u>Unite buffer file_mru<CR>
-" バッファ一覧
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-" ファイル一覧
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-" レジスタ一覧
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-" 最近使用したファイル一覧
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
-" 常用セット
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
-" 全部乗せ
-nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
-
-" ウィンドウを分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-" ウィンドウを縦に分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-" ESCキーを2回押すと終了    
-"
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-
-"---------------------------------------------
-" VIM-LaTeX
-"---------------------------------------------
-filetype plugin on
-filetype indent on
-set shellslash
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-"let g:Imap_UsePlaceHolders = 1
-"let g:Imap_DeleteEmptyPlaceHolders = 1
-"let g:Imap_StickyPlaceHolders = 0
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-"let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-"let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
-"let g:Tex_FormatDependency_ps = 'dvi,ps'
-let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/ptex2pdf -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/ptex2pdf -l -u -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/pdflatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-""let g:Tex_CompileRule_pdf = '/usr/texbin/luajitlatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-"let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
-"let g:Tex_CompileRule_pdf = '/usr/local/bin/ps2pdf $*.ps'
-"let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-"let g:Tex_CompileRule_dvi = 'platex --interaction=nonstopmode $*'
-
-"let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode -file-line-error-style -kanji=sjis $*'
-let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-
-"let g:Tex_CompileRule_dvi = '/usr/texbin/uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
-let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
-"let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
-"let g:Tex_BibtexFlavor = '/usr/texbin/bibtex'
-"let g:Tex_BibtexFlavor = '/usr/texbin/bibtexu'
-"let g:Tex_MakeIndexFlavor = '$*.idx'
-"let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
-"let g:Tex_MakeIndexFlavor = '/usr/texbin/makeindex $*.idx'
-"let g:Tex_MakeIndexFlavor = '/usr/texbin/texindy $*.idx'
-let g:Tex_UseEditorSettingInDVIViewer = 1
-let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Skim.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXShop.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a TeXworks.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Firefox.app'
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a "Adobe Reader.app"'
-"let g:Tex_ViewRule_ps = '/usr/bin/open'
-"let g:Tex_ViewRule_dvi = '/usr/bin/open'
-
-" フォント関係のwarningを無視 dvi→pdfの処理が止まってしまうので
-let g:Tex_IgnoredWarnings =
-    \'Underfull'."\n".
-    \'Overfull'."\n".
-    \'specifier changed to'."\n".
-    \'You have requested'."\n".
-    \'Missing number, treated as zero.'."\n".
-    \'There were undefined references'."\n".
-    \'Citation %.%# undefined'."\n".
-    \"Font shape \`JT1/gt/m/it\' undefined"."\n".
-    \"Font shape \`JY1/gt/m/it\' undefined"."\n".
-    \"Font shape \`JT1/mc/m/it\' undefined"."\n".
-    \"Font shape \`JY1/mc/m/it\' undefined"."\n".
-    \"Font shape \`JT1/mc/bx/it\' undefined"."\n".
-    \"Font shape \`JY1/mc/bx/it\' undefined"."\n".
-    \'LaTeX Font Warning: Some font shapes were not available, defaults substituted.'
-let g:Tex_IgnoreLevel = 14
-
-" Makefile を読み込ませない
-let g:Tex_UseMakefile = 0
-" 自動的に折りたたみ off
-let g:Tex_AutoFolding = 0
-
-" Mac ではalt+key が入力できないのでマッピング変更
-imap ∫ <Plug>Tex_MathBF
-imap ç <Plug>Tex_MathCal
-imap ¬ <Plug>Tex_LeftRight
-imap \it <Plug>Tex_InsertItemOnThisLine
-" EALの入力で
-" \begin{align}
-" <++>
-" \label{eq:<++>}
-" \end{align}<++>
-" を出力する。
-augroup MyIMAPs
-    au!
-    au VimEnter * call IMAP('EAL','\begin{align}<++>\label{eq:<++>}\end{align}<++>','tex')
-augroup END
+" vim-latex の設定
+if filereadable(expand('~/initfiles/vimlatex.vimrc'))
+    source ~/initfiles/vimlatex.vimrc
+endif
