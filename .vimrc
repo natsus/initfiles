@@ -214,6 +214,7 @@ NeoBundle 'scrooloose/syntastic'
 
 "" Unite
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 
 "" Unite source
 NeoBundle 'Shougo/unite-outline'
@@ -226,8 +227,11 @@ NeoBundle 'vim-scripts/dbext.vim'
 NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 "" 補完
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
+"NeoBundle 'Shougo/neocomplcache'
+" if_luaが有効ならneocompleteを使う
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+NeoBundle "Shougo/neosnippet"
+NeoBundle "Shougo/neosnippet-snippets"
 NeoBundle 'taichouchou2/vim-rsense'
 
 "" コメント
@@ -328,6 +332,28 @@ filetype plugin indent on     " required!
 filetype indent on
 syntax on
 
+"---------------------------------------------
+" neosnippet の設定
+"---------------------------------------------
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
 
 " unite の設定
 if filereadable(expand('~/initfiles/unite.vimrc'))
@@ -338,3 +364,9 @@ endif
 if filereadable(expand('~/initfiles/vimlatex.vimrc'))
     source ~/initfiles/vimlatex.vimrc
 endif
+
+" neocomplete.vim
+if filereadable(expand('~/initfiles/neocomplete.vimrc'))
+    source ~/initfiles/neocomplete.vimrc
+endif
+
