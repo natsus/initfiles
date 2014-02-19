@@ -253,11 +253,45 @@ NeoBundle 'basyura/unite-rails'
 "" markdown のsyntaxハイライト
 NeoBundle 'tpope/vim-markdown'
 
-"" coffee script
-NeoBundle 'kchmck/vim-coffee-script'
-
 "" surround.vim
 NeoBundle 'tpope/vim-surround'
+
+"---------------------------------------------
+" coffeescript の設定 (syntax + 自動compile)
+"---------------------------------------------
+
+NeoBundle 'kchmck/vim-coffee-script'
+
+if filereadable(expand('~/initfiles/coffee.vimrc'))
+    source ~/initfiles/coffee.vimrc
+endif
+
+
+"---------------------------------------------
+" lightline の設定
+"   indentの深さに色を付ける
+"---------------------------------------------
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+
+" vim立ち上げたときに、自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup=1
+" ガイドをスタートするインデントの量
+let g:indent_guides_start_level=2
+" 自動カラーを無効にする
+let g:indent_guides_auto_colors=0
+" 奇数インデントのカラー
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=gray
+" 偶数インデントのカラー
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=darkgray
+" ハイライト色の変化の幅
+let g:indent_guides_color_change_percent = 30
+" ガイドの幅
+let g:indent_guides_guide_size = 1
+
+"---------------------------------------------
+" lightline の設定
+"---------------------------------------------
 
 "" status bar highlight
 set guifont=Ricty\ for\ Powerline
