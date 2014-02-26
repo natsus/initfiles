@@ -186,75 +186,76 @@ augroup END
 "----------------------------------------------------
                                                                                            
 set nocompatible               " be iMproved
-filetype off
-
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
-endif
-" originalrepos on github
-
-NeoBundle 'Shougo/neobundle.vim', {
-  \ 'depends': ['Shougo/unite.vim'],
+ filetype off
+ 
+ 
+ if has('vim_starting')
+   set runtimepath+=~/.vim/bundle/neobundle.vim
+   call neobundle#rc(expand('~/.vim/bundle/'))
+ endif
+ " originalrepos on github
+ 
+ NeoBundle 'Shougo/neobundle.vim', {
+   \ 'depends': ['Shougo/unite.vim'],
+  \ }
+ " NeoBundle 'Shougo/neobundle.vim'
+ NeoBundle 'Shougo/vimproc', {
+   \ 'build' : {
+     \ 'windows' : 'make -f make_mingw32.mak',
+     \ 'cygwin' : 'make -f make_cygwin.mak',
+     \ 'mac' : 'make -f make_mac.mak',
+     \ 'unix' : 'make -f make_unix.mak',
+   \ },
  \ }
-" NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-    \ 'windows' : 'make -f make_mingw32.mak',
-    \ 'cygwin' : 'make -f make_cygwin.mak',
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-  \ },
-\ }
-NeoBundle 'VimClojure'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'jpalardy/vim-slime'
-NeoBundle 'scrooloose/syntastic'
+ NeoBundle 'VimClojure'
+ NeoBundle 'Shougo/vimshell'
+ NeoBundle 'jpalardy/vim-slime'
+ NeoBundle 'scrooloose/syntastic'
+ 
+ "" Unite
+ NeoBundle 'Shougo/unite.vim'
+ NeoBundle 'Shougo/neomru.vim'
+ 
+ "" Unite source
+ NeoBundle 'Shougo/unite-outline'
+ 
+ 
+ "" その他
+ NeoBundle 'tpope/vim-endwise.git' 
+ NeoBundle 'ruby-matchit'
+ NeoBundle 'vim-scripts/dbext.vim'
+ NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+ 
+ "" 補完
+ "NeoBundle 'Shougo/neocomplcache'
+ " if_luaが有効ならneocompleteを使う
+ NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+ NeoBundle "Shougo/neosnippet"
+ NeoBundle "Shougo/neosnippet-snippets"
+ NeoBundle 'taichouchou2/vim-rsense'
+ 
+ "" コメント
+ "NeoBundle 'tomtom/tcomment_vim'
+ "NeoBundle 'taichouchou2/surround.vim'
+ 
+ "" railsサポート
+ NeoBundle 'taichouchou2/vim-rails'
+ NeoBundle 'romanvbabenko/rails.vim'
+ NeoBundle 'ujihisa/unite-rake'
+ NeoBundle 'basyura/unite-rails'
+ 
+ "" reference環境
+ "NeoBundle 'thinca/vim-ref'
+ "NeoBundle 'taichouchou2/vim-ref-ri'
+ "NeoBundle 'taq/vim-rspec'
+ ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+ 
+ "" markdown のsyntaxハイライト
+ NeoBundle 'tpope/vim-markdown'
+ 
+ "" surround.vim
+ NeoBundle 'tpope/vim-surround'
 
-"" Unite
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-
-"" Unite source
-NeoBundle 'Shougo/unite-outline'
-
-
-"" その他
-NeoBundle 'tpope/vim-endwise.git' 
-NeoBundle 'ruby-matchit'
-NeoBundle 'vim-scripts/dbext.vim'
-NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
-
-"" 補完
-"NeoBundle 'Shougo/neocomplcache'
-" if_luaが有効ならneocompleteを使う
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
-NeoBundle "Shougo/neosnippet"
-NeoBundle "Shougo/neosnippet-snippets"
-NeoBundle 'taichouchou2/vim-rsense'
-
-"" コメント
-"NeoBundle 'tomtom/tcomment_vim'
-"NeoBundle 'taichouchou2/surround.vim'
-
-"" railsサポート
-NeoBundle 'taichouchou2/vim-rails'
-NeoBundle 'romanvbabenko/rails.vim'
-NeoBundle 'ujihisa/unite-rake'
-NeoBundle 'basyura/unite-rails'
-
-"" reference環境
-"NeoBundle 'thinca/vim-ref'
-"NeoBundle 'taichouchou2/vim-ref-ri'
-"NeoBundle 'taq/vim-rspec'
-""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
-
-"" markdown のsyntaxハイライト
-NeoBundle 'tpope/vim-markdown'
-
-"" surround.vim
-NeoBundle 'tpope/vim-surround'
 
 "---------------------------------------------
 " coffeescript の設定 (syntax + 自動compile)
@@ -383,10 +384,11 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
 \: "\<TAB>"
 
+" tex のコードが見にくくなるのでコメントアウト
 " For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+"if has('conceal')
+"  set conceallevel=2 concealcursor=i
+"endif
 
 
 " unite の設定
