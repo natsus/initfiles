@@ -406,3 +406,21 @@ if filereadable(expand('~/initfiles/neocomplete.vimrc'))
     source ~/initfiles/neocomplete.vimrc
 endif
 
+"----------------------------------------------------
+" セミコロンとコロンを入れ替えるスクリプト (US, JIS) 
+"----------------------------------------------------
+" http://www.ibm.com/developerworks/jp/linux/library/l-vim-script-1/
+" http://vim-users.jp/2010/06/hack158/
+
+:function! SwapColSemicol()
+:    let g:col_semicol = exists('g:col_semicol') ? !g:col_semicol : 1
+:    if g:col_semicol
+:        nnoremap : ;
+:        nnoremap ; :
+:    else
+:        nnoremap : :
+:        nnoremap ; ;
+:    endif
+:endfunction
+
+command! SwapColonSemiColon call SwapColSemicol()
