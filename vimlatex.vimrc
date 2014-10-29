@@ -57,14 +57,17 @@ let g:Tex_IgnoredWarnings =
     \'Missing number, treated as zero.'."\n".
     \'There were undefined references'."\n".
     \'Citation %.%# undefined'."\n".
-    \"Font shape \`JT1/gt/m/it\' undefined"."\n".
-    \"Font shape \`JY1/gt/m/it\' undefined"."\n".
-    \"Font shape \`JT1/mc/m/it\' undefined"."\n".
-    \"Font shape \`JY1/mc/m/it\' undefined"."\n".
-    \"Font shape \`JT1/mc/bx/it\' undefined"."\n".
-    \"Font shape \`JY1/mc/bx/it\' undefined"."\n".
-    \'LaTeX Font Warning: Some font shapes were not available, defaults substituted.'
-let g:Tex_IgnoreLevel = 14
+    \'LaTeX Font Warning:'"
+"    \"Font shape \`JT1/gt/m/it\' undefined"."\n".
+"    \"Font shape \`JY1/gt/m/it\' undefined"."\n".
+"    \"Font shape \`JT1/mc/m/it\' undefined"."\n".
+"    \"Font shape \`JY1/mc/m/it\' undefined"."\n".
+"    \"Font shape \`JT1/mc/bx/it\' undefined"."\n".
+"    \"Font shape \`JY1/mc/bx/it\' undefined"."\n".
+"    \"Empty `thebibliography' environment"."\n".
+"    \'LaTeX Font Warning: Some font shapes were not available, defaults substituted.'
+"    \'LaTeX Font Warning: Font shape '
+let g:Tex_IgnoreLevel = 8
 
 " Makefile を読み込ませない
 let g:Tex_UseMakefile = 0
