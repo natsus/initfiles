@@ -184,77 +184,96 @@ augroup END
 "----------------------------------------------------
 " NeoBundle
 "----------------------------------------------------
-                                                                                           
-set nocompatible               " be iMproved
- filetype off
- 
- 
- if has('vim_starting')
-   set runtimepath+=~/.vim/bundle/neobundle.vim
-   call neobundle#rc(expand('~/.vim/bundle/'))
- endif
- " originalrepos on github
- 
- NeoBundle 'Shougo/neobundle.vim', {
-   \ 'depends': ['Shougo/unite.vim'],
-  \ }
- " NeoBundle 'Shougo/neobundle.vim'
- NeoBundle 'Shougo/vimproc', {
-   \ 'build' : {
-     \ 'windows' : 'make -f make_mingw32.mak',
-     \ 'cygwin' : 'make -f make_cygwin.mak',
-     \ 'mac' : 'make -f make_mac.mak',
-     \ 'unix' : 'make -f make_unix.mak',
-   \ },
- \ }
- NeoBundle 'VimClojure'
- NeoBundle 'Shougo/vimshell'
- NeoBundle 'jpalardy/vim-slime'
- NeoBundle 'scrooloose/syntastic'
- 
- "" Unite
- NeoBundle 'Shougo/unite.vim'
- NeoBundle 'Shougo/neomru.vim'
- 
- "" Unite source
- NeoBundle 'Shougo/unite-outline'
- 
- 
- "" その他
- NeoBundle 'tpope/vim-endwise.git' 
- NeoBundle 'ruby-matchit'
- NeoBundle 'vim-scripts/dbext.vim'
- NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
- 
- "" 補完
- "NeoBundle 'Shougo/neocomplcache'
- " if_luaが有効ならneocompleteを使う
- NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
- NeoBundle "Shougo/neosnippet"
- NeoBundle "Shougo/neosnippet-snippets"
- NeoBundle 'taichouchou2/vim-rsense'
- 
- "" コメント
- "NeoBundle 'tomtom/tcomment_vim'
- "NeoBundle 'taichouchou2/surround.vim'
- 
- "" railsサポート
- NeoBundle 'taichouchou2/vim-rails'
- NeoBundle 'romanvbabenko/rails.vim'
- NeoBundle 'ujihisa/unite-rake'
- NeoBundle 'basyura/unite-rails'
- 
- "" reference環境
- "NeoBundle 'thinca/vim-ref'
- "NeoBundle 'taichouchou2/vim-ref-ri'
- "NeoBundle 'taq/vim-rspec'
- ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
- 
- "" markdown のsyntaxハイライト
- NeoBundle 'tpope/vim-markdown'
- 
- "" surround.vim
- NeoBundle 'tpope/vim-surround'
+
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
+
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
+NeoBundle 'VimClojure'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'scrooloose/syntastic'
+
+"" Unite
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
+
+"" Unite source
+NeoBundle 'Shougo/unite-outline'
+
+
+"" その他
+NeoBundle 'tpope/vim-endwise.git' 
+NeoBundle 'ruby-matchit'
+NeoBundle 'vim-scripts/dbext.vim'
+NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+NeoBundle 'Townk/vim-autoclose'
+
+"" 補完
+"NeoBundle 'Shougo/neocomplcache'
+" if_luaが有効ならneocompleteを使う
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+NeoBundle "Shougo/neosnippet"
+NeoBundle "Shougo/neosnippet-snippets"
+NeoBundle 'taichouchou2/vim-rsense'
+
+"" コメント
+"NeoBundle 'tomtom/tcomment_vim'
+"NeoBundle 'taichouchou2/surround.vim'
+
+"" railsサポート
+NeoBundle 'taichouchou2/vim-rails'
+NeoBundle 'romanvbabenko/rails.vim'
+NeoBundle 'ujihisa/unite-rake'
+NeoBundle 'basyura/unite-rails'
+
+"" reference環境
+"NeoBundle 'thinca/vim-ref'
+"NeoBundle 'taichouchou2/vim-ref-ri'
+"NeoBundle 'taq/vim-rspec'
+""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+
+"" markdown のsyntaxハイライト
+NeoBundle 'tpope/vim-markdown'
+
+"" surround.vim
+NeoBundle 'tpope/vim-surround'
 
 
 "---------------------------------------------
