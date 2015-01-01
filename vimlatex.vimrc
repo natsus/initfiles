@@ -57,7 +57,9 @@ let g:Tex_IgnoredWarnings =
     \'Missing number, treated as zero.'."\n".
     \'There were undefined references'."\n".
     \'Citation %.%# undefined'."\n".
-    \'LaTeX Font Warning:'"
+    \'LaTeX Font Warning:'."\n".
+    \'LaTeX Warning: Optional argument of \\twocolumn too tall on page 1.'."\n".
+    \'LaTeX Warning: Text page 1 contains only floats.'
 "    \"Font shape \`JT1/gt/m/it\' undefined"."\n".
 "    \"Font shape \`JY1/gt/m/it\' undefined"."\n".
 "    \"Font shape \`JT1/mc/m/it\' undefined"."\n".
@@ -67,7 +69,7 @@ let g:Tex_IgnoredWarnings =
 "    \"Empty `thebibliography' environment"."\n".
 "    \'LaTeX Font Warning: Some font shapes were not available, defaults substituted.'
 "    \'LaTeX Font Warning: Font shape '
-let g:Tex_IgnoreLevel = 8
+let g:Tex_IgnoreLevel = 10
 
 " Makefile を読み込ませない
 let g:Tex_UseMakefile = 0
