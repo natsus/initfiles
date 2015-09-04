@@ -59,8 +59,8 @@ let g:Tex_IgnoredWarnings =
     \'Citation %.%# undefined'."\n".
     \'LaTeX Font Warning:'."\n".
     \'LaTeX Warning: Optional argument of \\twocolumn too tall on page 1.'."\n".
-    \'LaTeX Warning: Text page 1 contains only floats.'.
-    \'LaTeX Warning: No \author given.'
+    \'LaTeX Warning: Text page 1 contains only floats.'."\n".
+    \'LaTeX Warning: No \\author given.'
 "    \"Font shape \`JT1/gt/m/it\' undefined"."\n".
 "    \"Font shape \`JY1/gt/m/it\' undefined"."\n".
 "    \"Font shape \`JT1/mc/m/it\' undefined"."\n".
